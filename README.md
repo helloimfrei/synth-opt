@@ -16,7 +16,7 @@ Installation:
 Usage:
 1. Open an Ableton Live set, and make sure you configure the parameters you're interested in (in Serum: Click "Configure", then select each parameter you want to include in optimization). **Important:** For devices without a Configure button (stock plugins), you'll need to group the device into an Instrument Rack and assign macros for each parameter of interest. Otherwise, every parameter of the device will be included (planning to include a cleaner fix for this in the near future)
 2. Run `synth-opt --device <the device you want to optimize: e.g. serum>` in your terminal to launch the optimization session.
-That's it! Provide a score from 0-100 for each suggested parameter set, and synth-opt will update the device automatically.
+3. That's it! Provide a score from 0-10 for each suggested parameter set, and synth-opt will update the device automatically.
 
 Some tips:
 - Use --track to optionally specify a track name (exact match) containg your device if you have multiple device instances 
