@@ -1,5 +1,7 @@
 import argparse
 from .device import DeviceOptimizer
+import os
+import pyfiglet
 
 def main():
     ap = argparse.ArgumentParser(
@@ -11,7 +13,7 @@ def main():
     ap.add_argument(
         "--state-file",
         help="Path to optimizer state file (pickle)",
-        default="saved_params/optimizer_state.pkl",
+        default="saved_state/optimizer_state.pkl",
     )
     args = ap.parse_args()
 
@@ -26,6 +28,8 @@ def main():
 
     try:
         while True:
+            os.system('clear')
+            print(pyfiglet.figlet_format("SYNTH OPT"))
             # Ask the optimizer for the next parameters
             proposal = opt.ask()
             print("Proposed parameters:", proposal)
