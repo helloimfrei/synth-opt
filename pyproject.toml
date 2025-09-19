@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "synth-opt"
+version = "0.1.0"
+description = "Bayesian optimization for sound design in Ableton Live."
+authors = ["Christian Tapp <christianjtapp@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+joblib = "1.5.2"
+numpy = "2.2.6"
+packaging = "25.0"
+pyaml = "25.7.0"
+pylive = "0.4.0"
+python-osc = "1.9.3"
+pyyaml = "6.0.2"
+scikit-learn = "1.7.2"
+scikit-optimize = "0.10.2"
+scipy = "1.15.3"
+threadpoolctl = "3.6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+synth-opt = "synthopt.cli:main"
