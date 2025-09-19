@@ -102,7 +102,7 @@ class DeviceOptimizer:
     def ask(self) -> dict:
         x = self.opt.ask()
         self.pending_x = x
-        return dict(zip(self.params.keys(), x))
+        return dict(zip(self.params.keys(), (round(v,2) for v in x)))
 
     def tell(self, score: float, log: bool = True):
         if self.pending_x is None:

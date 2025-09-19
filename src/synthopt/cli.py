@@ -32,7 +32,9 @@ def main():
             print(pyfiglet.figlet_format("SYNTH OPT"))
             # Ask the optimizer for the next parameters
             proposal = opt.ask()
-            print("Proposed parameters:", proposal)
+            print("Proposed parameters:")
+            for k, v in proposal.items():
+                print(f"{k}: {v}")
 
             # Apply them to Live
             opt.set_params(proposal)
@@ -40,7 +42,7 @@ def main():
             print("Parameters pushed to Live.\n")
 
             # Ask the user for feedback
-            score = input("How did you like the sound? (0-100, or 'q' to quit): ")
+            score = input("How do you like the sound? (0-100, or 'q' to quit): ")
             if score.lower().startswith("q"):
                 print("Exiting session.")
                 break
