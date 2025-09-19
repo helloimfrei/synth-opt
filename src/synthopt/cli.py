@@ -42,10 +42,12 @@ def main():
             print("Parameters pushed to Live.\n")
 
             # Ask the user for feedback
-            score = input("How do you like the sound? (0-100, or 'q' to quit): ")
+            score = input("How do you like the sound? (0-10, or 'q' to quit): ")
             if score.lower().startswith("q"):
                 print("Exiting session.")
                 break
+            if score == "":
+                score = 0
 
             try:
                 score_val = float(score)

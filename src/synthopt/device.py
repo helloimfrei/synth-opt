@@ -5,6 +5,13 @@ from pathlib import Path
 from skopt import Optimizer
 from skopt.space import Real
 
+"""
+TODO:
+Breaks when devices are inserted before the device of interest
+For stock plugins without a configure button, need a way to filter what parameters are of interest 
+(for now, grouping into Instrument Rack and assigning macros is OK. But need to filter out all default macros that aren't assigned)
+
+"""
 
 class DeviceOptimizer:
     """
