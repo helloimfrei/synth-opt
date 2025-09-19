@@ -1,32 +1,55 @@
-# src/synthopt/cli.py
 import argparse
-from .device import DeviceOptimizer  # your class
+from .device import DeviceOptimizer
 
 def main():
-    ap = argparse.ArgumentParser(prog="synth-opt", description="Optimize Live device params")
+    ap = argparse.ArgumentParser(
+        prog="synth-opt",
+        description="Interactive Bayesian optimization session for Live device params",
+    )
     ap.add_argument("--device", required=True, help="Device name (substring match)")
     ap.add_argument("--track", help="Track name (exact match)")
-    ap.add_argument("--apply", action="store_true", help="Apply proposed params to Live")
-    ap.add_argument("--score", type=float, help="Score for the *previous* proposal")
-    ap.add_argument("--state-file", help="Path to optimizer state file (pickle)")
+    ap.add_argument(
+        "--state-file",
+        help="Path to optimizer state file (pickle)",
+        default="saved_params/optimizer_state.pkl",
+    )
     args = ap.parse_args()
 
     opt = DeviceOptimizer(
         device_name=args.device,
         track_name=args.track,
-        state_file=args.state_file
+        state_file=args.state_file,
     )
 
-    # If user passed a score, record it for the *last* ask()
-    if args.score is not None:
-        opt.tell(args.score)
-        print(f"Recorded score: {args.score}")
+    print(f"Starting optimization session for device: {args.device}")
+    print("Press Ctrl+C to quit.\n")
 
-    # Always propose the next set
-    proposal = opt.ask()
-    print("Next proposal:", proposal)
+    try:
+        while True:
+            # Ask the optimizer for the next parameters
+            proposal = opt.ask()
+            print("Proposed parameters:", proposal)
 
-    if args.apply:
-        opt.set_params(proposal)
-        opt.push_params()
-        print("Applied proposal to Live.")
+            # Apply them to Live
+            opt.set_params(proposal)
+            opt.push_params()
+            print("Parameters pushed to Live.\n")
+
+            # Ask the user for feedback
+            score = input("How did you like the sound? (0-100, or 'q' to quit): ")
+            if score.lower().startswith("q"):
+                print("Exiting session.")
+                break
+
+            try:
+                score_val = float(score)
+            except ValueError:
+                print("Invalid score. Please enter a number or 'q' to quit.")
+                continue
+
+            # Tell optimizer the result
+            opt.tell(score_val)
+            print(f"Recorded score: {score_val}\n")
+
+    except KeyboardInterrupt:
+        print("\nSession interrupted. Goodbye!")

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "synth-opt"
+name = "synthopt"
 version = "0.1.0"
 description = "Bayesian optimization for sound design in Ableton Live."
 authors = ["Christian Tapp <christianjtapp@gmail.com>"]

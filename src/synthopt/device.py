@@ -17,6 +17,7 @@ class DeviceOptimizer:
         self.device = self.locate_device(device_name,track_name=track_name)
         self.params = {param.name: param.value[-1] for param in self.device.parameters}
         self.params.pop("Device On", None)
+        self.round_count = 0
     
         Path("saved_params").mkdir(parents=True, exist_ok=True)
         self.state_file = Path(state_file)
@@ -114,6 +115,7 @@ class DeviceOptimizer:
         self.opt.tell(self.pending_x, -float(score))
         self.pending_x = None
         if log:
-            self._log_params(tag=f"score_{score}")
+            self._log_params(tag=f"round_{self.round_count}_score_{score}")
+            self.round_count += 1
         self._save_optimizer()
 
