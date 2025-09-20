@@ -5,8 +5,6 @@ This package lets you run optimization on any number of device parameters, and u
 
 User preference is obviously a highly subjective scoring metric. This is a bit of an experiment to understand whether an approach like this even works, and if it could augment the sound design workflow.
 
-**Current only validated with Serum/Serum 2!** 
-
 Installation:
 1. Follow the installation instructions for [AbletonOSC](https://github.com/ideoforms/AbletonOSC). This is required to allow synth-opt to talk to Ableton Live.
 2. Clone the synth-opt repo: `git clone https://github.com/helloimfrei/synth-opt.git`
